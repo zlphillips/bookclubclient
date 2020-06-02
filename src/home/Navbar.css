@@ -1,0 +1,14 @@
+.App {
+background-image: url("../assets/bookOnBeach.jpg");
+background-size: cover;
+}
+.login {
+    text-align: center;
+}
+.brandButton {
+    color: #ffffff;
+}
+.navLink{
+    color: #ffffff;
+    list-style: none;
+}

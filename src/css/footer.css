@@ -1,0 +1,20 @@
+.mainFooter {
+    padding: 50px;
+}
+#submitButton {
+    background-color: #07103A;
+    color: #ffffff;
+    margin: 4px;
+}
+#submitButton:hover{
+    opacity: .9;
+}
+#full-name{
+    margin: 4px;
+}
+#email-address{
+    margin: 4px;
+}
+#message{
+    margin: 4px;
+}
