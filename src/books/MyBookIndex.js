@@ -7,6 +7,7 @@ import APIURL from '../Helpers/environment'
 import Sitebar from '../home/Navbar'
 
 const BookIndex = (props) => {
+
     const [books, setBooks] = useState([]);
     const [updateActive, setUpdateActive] = useState(false);
     const [bookToUpdate, setBookToUpdate] = useState({});
@@ -22,10 +23,6 @@ const BookIndex = (props) => {
             console.log(logData)
             setBooks(logData)
         })
-    }
-    let buttonStyle = {
-        backgroundColor: "#07103A",
-        color: "#ffffff"
     }
 
     const editUpdateBook = (book) =>{
@@ -56,18 +53,13 @@ const BookIndex = (props) => {
                 
             {updateActive ? <BookEdit bookToUpdate={bookToUpdate} updateOff={updateOff} token={props.token}
             fetchBooks={fetchBooks}/> : <></>}
-
-            <br/>
-            <br/>
-            <br/>
-            <Button style={buttonStyle} onClick={toggle}>Write a Review</Button>
+            <Button onClick={toggle}>Write a Review</Button>
             <Modal isOpen={modal} toggle={toggle} className="review">
             <ModalHeader toggle={toggle}>Write a new review:</ModalHeader>
             <ModalBody>
                 <BookCreate fetchBooks={fetchBooks} token={props.token}/>
             </ModalBody>
             </Modal>
-            
         </>
     )
 }

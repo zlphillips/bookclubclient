@@ -8,13 +8,14 @@ const NewReview = (props) => {
     const[genre, setGenre] = useState(undefined);
     const[length, setLength] = useState('');
     const[review, setReview] = useState('');
+    const[rating, setRating] = useState('');
     const[owner, setOwner] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         fetch(`${APIURL}/bookclub/book/new-review`, {
             method: 'POST',
-            body: JSON.stringify({book: {title: title, author: author, genre: genre, length: length, review: review, owner: owner}}),
+            body: JSON.stringify({book: {title: title, author: author, genre: genre, length: length, review: review, rating: rating, owner: owner}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': props.token
@@ -27,9 +28,15 @@ const NewReview = (props) => {
             setGenre('');
             setLength('');
             setReview('');
+            setRating('');
+            setOwner('');
             props.fetchBooks();
         })
     }
+
+    const [modal, setModal] = useState(false);
+    
+    const toggle = () => setModal(!modal);
     
     return (
         <div className='newReview'>
@@ -73,6 +80,10 @@ const NewReview = (props) => {
                     <FormGroup>
                         <Label htmlFor='length'>Pages:</Label>
                         <Input name='length' value={length} onChange={(e) => setLength(e.target.value)} required=" "/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor='rating'>Rating:</Label>
+                        <Input name='rating' value={rating} onChange={(e) => setRating(e.target.value)} required/>
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor='review'>Review:</Label>

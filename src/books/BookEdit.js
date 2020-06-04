@@ -3,16 +3,19 @@ import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} fr
 import APIURL from '../Helpers/environment'
 
 const EditReview = (props) => {
-        const [editTitle, setEditTitle] = useState(props.bookToUpdate.title);
-        const [editAuthor, setEditAuthor] = useState(props.bookToUpdate.author);
-        const [editGenre, setEditGenre] = useState(props.bookToUpdate.genre);
-        const [editLength, setEditLength] = useState(props.bookToUpdate.length);
-        const [editReview, setEditReview] = useState(props.bookToUpdate.review)
+    
+        const [editTitle, setEditTitle] = useState('');
+        const [editAuthor, setEditAuthor] = useState('');
+        const [editGenre, setEditGenre] = useState('');
+        const [editLength, setEditLength] = useState('');
+        const [editReview, setEditReview] = useState('');
+        const [editRating, setEditRating] = useState('')
 
         const bookUpdate = (event, book) => {
             event.preventDefault();
-            fetch(`${APIURL}/bookclub/book/${props.bookToUpdate.id}`, {
+            fetch(`${APIURL}/bookclub/book/${book.id}`, {
                 method: "PUT",
+                body: JSON.stringify({book: {title: editTitle, author: editAuthor, genre: editGenre, length: editLength, rating: editRating, review: editReview}}),
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': props.token
@@ -29,10 +32,6 @@ const EditReview = (props) => {
 
     return (
         <>
-        <Button onClick={toggle}>Update Review</Button>
-        <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle}>Edit Your Review</ModalHeader>
-            <ModalBody>
                 <Form onSubmit={bookUpdate}>
                     <FormGroup>
                         <Label htmlFor="title">Edit Title:</Label>
@@ -74,13 +73,15 @@ const EditReview = (props) => {
                         <Input name="length" value={editLength} onChange={(e) => setEditLength(e.target.value)}/>
                     </FormGroup>
                     <FormGroup>
+                        <Label name='rating'>Edit Rating:</Label>
+                        <Input name='rating' value={editRating} onChange={(e) => setEditRating(e.target.value)}/>
+                    </FormGroup>
+                    <FormGroup>
                         <Label name="review">Edit Review:</Label>
                         <Input type="textarea" name="review" value={editReview} onChange={(e) => setEditReview(e.target.value)}/>
                     </FormGroup>
                     <Button type="submit" onClick={toggle}>Update Review</Button>
                 </Form>
-            </ModalBody>
-        </Modal>
         </>
     )
 }

@@ -1,9 +1,9 @@
 import React, { Component, useEffect, useState } from 'react';
-import SiteBar from "./home/Navbar";
 import Auth from "./auth/Auth";
 import Footer from "./home/Footer";
 import BookIndex from "./books/BookIndex";
-import { Navbar } from 'reactstrap';
+import MyBookIndex from './books/MyBookIndex';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 function App() {
   const [sessionToken, setSessionToken] = useState('');
@@ -26,7 +26,6 @@ function App() {
 }
   return (
     <div className="App">
-      {<SiteBar />}
       {protectedViews()}
       <Footer />
     </div>

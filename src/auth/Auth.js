@@ -23,7 +23,7 @@ const Auth = (props) => {
             </Row>
             </Container>
             <Signup updateToken={props.updateToken}/>
-            <Login />
+            <Login updateToken={props.updateToken}/>
         </div>
     )
 }

@@ -1,34 +1,81 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import {Table, Button, Container, Row, Col, Modal, ModalBody, ModalHeader} from 'reactstrap';
+import BookEdit from './BookEdit'
+import APIURL from '../Helpers/environment'
 
 const BookTable = (props) => {
+    const [books, setBooks] = useState([]);
+    const [updateActive, setUpdateActive] = useState(false);
+    const [bookToUpdate, setBookToUpdate] = useState({});
+
+    
+
+    const bookRow = {
+        margin: "0px",
+        border: "1px solid"
+    }
+
+    const buttonCol = {
+        paddingBottom: '6px',
+        paddingTop: '10px'
+    }
+    
     const [modal, setModal] = useState(false);
     
     const toggle = () => setModal(!modal);
 
+    const editToggle = () => setModal(!modal);
+
     const bookList = () => {
+        const deleteBook = (book) => {
+            fetch(`${APIURL}/bookclub/book/${book.id}`, {
+                method: 'DELETE',
+                headers: new Headers ({
+                    'Content-Type': 'application/json',
+                    'Authorization': props.token
+                })
+            }).then(() => props.fetchBooks())
+        }
         return props.books.map((book, index) => { {/*Need this to put each book into it's own box, grid-like system*/}
             return(
-                        <article key={index}>
-                           Title: {book.title} <br/>
-                            Author: {book.author} <br/>
-                            Genre: {book.genre}  <br/>
-                            Pages: {book.length}  <br/>
-                            <a onClick={toggle}>Read Review</a>
-                            <Modal isOpen={modal} toggle={toggle} className="viewReview">
-                            <ModalHeader toggle={toggle}>Review for '{book.title}'</ModalHeader>
-                            <ModalBody>
-                            {book.review}
-                            </ModalBody>
-                            </Modal> <br/>
-                        </article>  
+                        
+                        <Container key={index} className='bookContainer'>
+                            <Row style={bookRow}>
+                                <Col xs="2" className="bookCol">
+                                    Title: {book.title} <br/>
+                                </Col>
+                                <Col xs='2' className="bookCol">
+                                    Author: {book.author} <br/>
+                                </Col>
+                                <Col xs="2" className="bookCol">
+                                    Genre: {book.genre}  <br/>
+                                </Col>
+                                    Pages: {book.length}  <br/>
+                                <Col xs='2' className="bookCol">
+                                    Rating: {book.rating} <br/>
+                                </Col>
+                                <Col xs='2' className="bookCol">
+                                    Review: {book.review} <br/>
+                                </Col>
+                                <Col xs='12' style={buttonCol}>
+                                <Button onClick={toggle}>Revise</Button>
+                                    <Modal isOpen={modal} toggle={toggle} className="review">
+                                        <ModalHeader toggle={toggle}>Edit Review for {book.title}:</ModalHeader>
+                                        <ModalBody>
+                                            <BookEdit  token={props.token}/>
+                                        </ModalBody>
+                                    </Modal>
+                                    <Button color='danger' onClick={() => {deleteBook(book)}}>Delete</Button>
+                                    </Col>
+                                </Row>
+                                <br/>
+                        </Container>
             )
         })
     }
 
     return(
        <div>
-           
             <h2>Book Reviews</h2>
             <hr/>
             {bookList()}
