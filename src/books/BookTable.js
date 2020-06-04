@@ -19,6 +19,11 @@ const BookTable = (props) => {
         paddingBottom: '6px',
         paddingTop: '10px'
     }
+
+    let buttonStyle = {
+        backgroundColor: "#07103A",
+        color: "#ffffff"
+    }
     
     const [modal, setModal] = useState(false);
     
@@ -58,11 +63,11 @@ const BookTable = (props) => {
                                     Review: {book.review} <br/>
                                 </Col>
                                 <Col xs='12' style={buttonCol}>
-                                <Button onClick={toggle}>Revise</Button>
+                                <Button style={buttonStyle} onClick={toggle}>Revise</Button>
                                     <Modal isOpen={modal} toggle={toggle} className="review">
                                         <ModalHeader toggle={toggle}>Edit Review for {book.title}:</ModalHeader>
                                         <ModalBody>
-                                            <BookEdit  token={props.token}/>
+                                            <BookEdit setModal={setModal}  fetchBooks={props.fetchBooks} bookToUpdate={book} token={props.token}/>
                                         </ModalBody>
                                     </Modal>
                                     <Button color='danger' onClick={() => {deleteBook(book)}}>Delete</Button>

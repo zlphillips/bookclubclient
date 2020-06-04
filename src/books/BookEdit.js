@@ -4,16 +4,16 @@ import APIURL from '../Helpers/environment'
 
 const EditReview = (props) => {
     
-        const [editTitle, setEditTitle] = useState('');
-        const [editAuthor, setEditAuthor] = useState('');
-        const [editGenre, setEditGenre] = useState('');
-        const [editLength, setEditLength] = useState('');
-        const [editReview, setEditReview] = useState('');
-        const [editRating, setEditRating] = useState('')
+        const [editTitle, setEditTitle] = useState(props.bookToUpdate.title);
+        const [editAuthor, setEditAuthor] = useState(props.bookToUpdate.author);
+        const [editGenre, setEditGenre] = useState(props.bookToUpdate.genre);
+        const [editLength, setEditLength] = useState(props.bookToUpdate.length);
+        const [editReview, setEditReview] = useState(props.bookToUpdate.review);
+        const [editRating, setEditRating] = useState(props.bookToUpdate.rating)
 
-        const bookUpdate = (event, book) => {
-            event.preventDefault();
-            fetch(`${APIURL}/bookclub/book/${book.id}`, {
+        const bookUpdate = (e, book) => {
+            e.preventDefault();
+            fetch(`${APIURL}/bookclub/book/${props.bookToUpdate.id}`, {
                 method: "PUT",
                 body: JSON.stringify({book: {title: editTitle, author: editAuthor, genre: editGenre, length: editLength, rating: editRating, review: editReview}}),
                 headers: new Headers({
@@ -22,7 +22,8 @@ const EditReview = (props) => {
                 })
             }).then ((res) => {
                 props.fetchBooks();
-                props.updateOff()
+                /*props.updateOff()*/
+                props.setModal(false);
             })
         }
 
@@ -74,7 +75,7 @@ const EditReview = (props) => {
                     </FormGroup>
                     <FormGroup>
                         <Label name='rating'>Edit Rating:</Label>
-                        <Input name='rating' value={editRating} onChange={(e) => setEditRating(e.target.value)}/>
+                        <Input name='rating' min='1' max='5' value={editRating} onChange={(e) => setEditRating(e.target.value)}/>
                     </FormGroup>
                     <FormGroup>
                         <Label name="review">Edit Review:</Label>

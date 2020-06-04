@@ -32,12 +32,12 @@ const BookIndex = (props) => {
         setBookToUpdate(book);
         console.log(book)
     }
-    const updateOn = () => {
+    /*const updateOn = () => {
         setUpdateActive(true);
     }
     const updateOff = () => {
         setUpdateActive(false);
-    }
+    }*/
 
     const [modal, setModal] = useState(false);
     
@@ -51,10 +51,10 @@ const BookIndex = (props) => {
     return (
         <>
         <Sitebar />
-            <BookTable books={books} editUpdateBook={editUpdateBook} updateOn={updateOn} fetchBooks={fetchBooks}
+            <BookTable books={books} editUpdateBook={editUpdateBook} /*updateOn={updateOn}*/ fetchBooks={fetchBooks}
             token={props.token}/>
                 
-            {updateActive ? <BookEdit bookToUpdate={bookToUpdate} updateOff={updateOff} token={props.token}
+            {updateActive ? <BookEdit bookToUpdate={bookToUpdate} /*updateOff={updateOff}*/ token={props.token}
             fetchBooks={fetchBooks}/> : <></>}
 
             <br/>

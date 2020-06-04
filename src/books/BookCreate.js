@@ -83,7 +83,7 @@ const NewReview = (props) => {
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor='rating'>Rating:</Label>
-                        <Input name='rating' value={rating} onChange={(e) => setRating(e.target.value)} required/>
+                        <Input name='rating' min='1' max='5' value={rating} onChange={(e) => setRating(e.target.value)} required/>
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor='review'>Review:</Label>
