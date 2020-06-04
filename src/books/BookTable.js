@@ -64,7 +64,7 @@ const BookTable = (props) => {
                                     console.log(book)
                                     toggle()
                                     
-                                    }}>Revise!</Button>
+                                    }}>Revise</Button>
                                     
                                     <Button color='danger' onClick={() => {deleteBook(book)}}>Delete</Button>
                                     </Col>
