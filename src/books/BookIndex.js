@@ -35,10 +35,12 @@ const BookIndex = (props) => {
     }
     
     const [modal, setModal] = useState(false);
-    
+
+    const [reviewModal, setReviewModal] = useState(false);
+
     const toggle = () => setModal(!modal);
 
-    const toggleReviews = () => setModal(!modal);
+    const toggleReviews = () => setReviewModal(!reviewModal);
 
     useEffect(() => {
         fetchBooks();
@@ -55,7 +57,7 @@ const BookIndex = (props) => {
             <br/>
             <br/>
             <Button style={buttonStyle} onClick={toggleReviews}>All Book Reviews</Button>
-                <Modal isOpen={modal} toggle={toggleReviews} className="review">
+                <Modal isOpen={reviewModal} toggle={toggleReviews} className="review">
                     <ModalHeader toggle={toggleReviews}>All Book Reviews</ModalHeader>
                         <ModalBody>
                             <MyBookIndex setModal={setModal} fetchBooks={props.fetchBooks} token={props.token}/>
