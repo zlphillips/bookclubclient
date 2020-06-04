@@ -10,6 +10,10 @@ const NewReview = (props) => {
     const[review, setReview] = useState('');
     const[rating, setRating] = useState('');
     const[owner, setOwner] = useState('');
+    let buttonStyle = {
+        backgroundColor: "#07103A",
+        color: "#ffffff"
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +26,6 @@ const NewReview = (props) => {
             })
         }).then ((res) => res.json())
         .then ((logData) => {
-            console.log(logData);
             setTitle('');
             setAuthor('');
             setGenre('');
@@ -31,11 +34,11 @@ const NewReview = (props) => {
             setRating('');
             setOwner('');
             props.fetchBooks();
+            props.setModal();
         })
     }
 
     const [modal, setModal] = useState(false);
-    
     const toggle = () => setModal(!modal);
     
     return (
@@ -89,7 +92,7 @@ const NewReview = (props) => {
                         <Label htmlFor='review'>Review:</Label>
                         <Input type="textarea" value={review} onChange={(e) => setReview(e.target.value)} required="    "/>
                     </FormGroup>
-                    <Button type='submit'>Post Review</Button>
+                    <Button style={buttonStyle} onClick={toggle} type='submit'>Post Review</Button>
                 </Form>
         </div>
     )

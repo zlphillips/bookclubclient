@@ -29,8 +29,6 @@ const BookTable = (props) => {
     
     const toggle = () => setModal(!modal);
 
-    const editToggle = () => setModal(!modal);
-
     const bookList = () => {
         const deleteBook = (book) => {
             fetch(`${APIURL}/bookclub/book/${book.id}`, {

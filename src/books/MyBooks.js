@@ -3,11 +3,7 @@ import {Table, Button, Container, Row, Col, Modal, ModalBody, ModalHeader} from 
 import BookEdit from './BookEdit'
 
 const MyBooks = (props) => {
-    const [modal, setModal] = useState(false);
     
-    const toggle = () => setModal(!modal);
-
-    const editToggle = () => setModal(!modal);
 
     const bookList = () => {
         return props.books.map((book, index) => { {/*Need this to put each book into it's own box, grid-like system*/}
@@ -19,13 +15,6 @@ const MyBooks = (props) => {
                             Pages: {book.length}  <br/>
                             Rating: {book.rating} <br/>
                             Review: {book.review} <br/>
-                            <a onClick={editToggle}>Edit Review</a>
-                            <Modal isOpen={modal} toggle={editToggle} className="editReview">
-                            <ModalHeader toggle={editToggle}>Edit Review for '{book.title}'</ModalHeader>
-                            <ModalBody>
-                                <BookEdit />
-                            </ModalBody>
-                            </Modal>
                         </article>
             )
         })
@@ -33,8 +22,6 @@ const MyBooks = (props) => {
 
     return(
        <div>
-            <h2>Book Reviews</h2>
-            <hr/>
             {bookList()}
        </div>
     )

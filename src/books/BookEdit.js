@@ -22,7 +22,6 @@ const EditReview = (props) => {
                 })
             }).then ((res) => {
                 props.fetchBooks();
-                /*props.updateOff()*/
                 props.setModal(false);
             })
         }
@@ -30,6 +29,11 @@ const EditReview = (props) => {
         const [modal, setModal] = useState(false);
     
         const toggle = () => setModal(!modal);
+
+        let buttonStyle = {
+            backgroundColor: "#07103A",
+            color: "#ffffff"
+        }
 
     return (
         <>
@@ -81,7 +85,7 @@ const EditReview = (props) => {
                         <Label name="review">Edit Review:</Label>
                         <Input type="textarea" name="review" value={editReview} onChange={(e) => setEditReview(e.target.value)}/>
                     </FormGroup>
-                    <Button type="submit" onClick={toggle}>Update Review</Button>
+                    <Button type="submit" style={buttonStyle} onClick={toggle}>Update Review</Button>
                 </Form>
         </>
     )
