@@ -33,7 +33,7 @@ const handleSubmit = (e) => {
             <Container>
                 <Row>
                     <Col  sm="12" md={{ size: 6, offset: 3 }}>
-                    <Form onSubmit={(e) => handleSubmit(e)}>
+                    <Form onSubmit={handleSubmit}>
                         <FormGroup>
                             <Label htmlFor="email">Email</Label>
                             <Input onChange={(e) => setEmail(e.target.value)} type='email' name="email" value={email} required="email"/>
