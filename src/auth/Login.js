@@ -15,6 +15,7 @@ const Login = (props) => {
 
 const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Sign in attempt')
     fetch(`${APIURL}/bookclub/user/signin`, {
         method: "POST",
         body: JSON.stringify({user: {email: email, password: password}}),
